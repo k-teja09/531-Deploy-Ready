@@ -14,8 +14,6 @@ def get_db_connection():
     return connection
 
 
-
-
 @app.route('/')
 def index():
     return render_template('index.html', loginStatus = False)
