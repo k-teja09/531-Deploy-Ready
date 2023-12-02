@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Help Page</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../static/css/helpStyle.css">
+  <style>
+    /* Custom styles */
+    .hero-image {
+      background-image: url('C:/Users/ual-laptop/Desktop/EDM 531/Project/image.jpg');
+      height: 300px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: relative;
+    }
+    .hero-text {
+      text-align: center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-dark bg-dark justify-content-between">
+    <a class="navbar-brand" href="#">
+      <img src="../static/images/tugoNavLogo.png" alt="..." height="36">
+    </a>
+    <!-- <a class="navbar-brand" href="#">BikeShare</a> -->
+  
+    <div class="navbar-expand-lg ml-auto" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item ">
+          <a class="nav-link" href="/#">Home</a>
+        </li>
+
+        {% if loginStatus %}
+
+        <li class="nav-item">
+            <a class="nav-link" href="/customers">Customers</a>
+        </li>
+
+        <li class="nav-item ">
+            <a class="nav-link" href="/employees">Employees</a>
+          </li>
+
+        <li class="nav-item ">
+          <a class="nav-link" href="/stations">Stations</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="/vendors">Vendors</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="/bikeModels">Bike Models</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="/scenarios">Scenarios</a>
+          </li>
+        {% endif %}
+        
+        
+        <li class="nav-item ">
+          <a class="nav-link" href="/help">Help</a>
+        </li>
+
+
+        {% if not loginStatus %}
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Login</a>
+        </li>
+        {% endif %}
+
+
+        {% if loginStatus %}
+        <li class="nav-item ">
+          <a class="nav-link" href="/signout">Sign Out</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+
+
+  <div class="container mt-3">
+
+
+    <!-- Contact Information -->
+    <div class="row">
+      <div class="col-md-6">
+        <h2>Contact Information</h2>
+        <p>Contact Number: 302 390 3560</p>
+        <p>Email: <a href="mailto:youremail@example.com">TUGOcustservice@gmail.com</a></p>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- FAQ Section -->
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Frequently Asked Questions</h2>
+        <!-- Your FAQ content -->
+        <div class="accordion" id="faqAccordion">
+          <!-- Example FAQ items with Bootstrap accordion -->
+          <div class="card">
+            <div class="card-header" id="faqHeadingOne">
+              <h5 class="mb-0">
+                <button class="btn btn-link" data-toggle="collapse" data-target="#faqCollapseOne" aria-expanded="true" aria-controls="faqCollapseOne">
+                  How can we help?
+                </button>
+              </h5>
+            </div>
+            <div id="faqCollapseOne" class="collapse show" aria-labelledby="faqHeadingOne" data-parent="#faqAccordion">
+              <div class="card-body">
+                Bike Model
+                Locations
+                Time
+              </div>
+            </div>
+          </div>
+          <!-- More FAQ items can be added similarly -->
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- Additional Help Sections -->
+    <!-- Other sections or links that users might find helpful -->
+  </div>
+
+  <!-- Footer -->
+  <!-- You can include a footer here with relevant links or information -->
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

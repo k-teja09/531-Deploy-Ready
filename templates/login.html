@@ -1,0 +1,181 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="../static/images/favicon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="../static/css/style.css">
+    <title>BikeShare</title>
+</head>
+
+<body>
+    {% if alert %}
+    <script>
+      alert('{{ alert }}');
+    </script>
+  {% endif %}
+  <nav class="navbar navbar-dark bg-dark justify-content-between">
+    <a class="navbar-brand" href="#">
+      <img src="../static/images/tugoNavLogo.png" alt="..." height="36">
+    </a>
+    <!-- <a class="navbar-brand" href="#">BikeShare</a> -->
+  
+    <div class="navbar-expand-lg ml-auto" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item ">
+          <a class="nav-link" href="/#">Home</a>
+        </li>
+
+        {% if loginStatus %}
+
+        <li class="nav-item">
+            <a class="nav-link" href="/customers">Customers</a>
+        </li>
+
+        <li class="nav-item ">
+            <a class="nav-link" href="/employees">Employees</a>
+          </li>
+
+        <li class="nav-item ">
+          <a class="nav-link" href="/stations">Stations</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="/vendors">Vendors</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="/bikeModels">Bike Models</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="/scenarios">Scenarios</a>
+          </li>
+        {% endif %}
+        
+        
+        <li class="nav-item ">
+          <a class="nav-link" href="/help">Help</a>
+        </li>
+
+
+        {% if not loginStatus %}
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Login</a>
+        </li>
+        {% endif %}
+
+
+        {% if loginStatus %}
+        <li class="nav-item ">
+          <a class="nav-link" href="/signout">Sign Out</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+
+    <!-- Section: Design Block -->
+    <section class="">
+        <!-- Jumbotron -->
+        <div class="px-4 py-5 px-md-5 text-center text-lg-start" style="background-color: hsl(0, 0%, 96%)">
+        <div class="container">
+            <div class="row gx-lg-5 align-items-center">
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <h1 class="my-5 display-3 fw-bold ls-tight">
+                Welcome to <br />
+                <span class="text-primary">Tugo Bike Share</span>
+                </h1>
+                <p style="color: hsl(217, 10%, 50.8%)">
+                  Discover Tucson on two wheels with Tugo Bike Share! With over 330 bikes and 41 stations, navigating the city has never been easier or more fun!
+                </p>
+              </div>
+
+              <div class="col-lg-6 mb-4 mb-lg-0">
+                <div class="card">
+                    <h3 class="text-center">Login</h1>
+                  <div class="card-body py-5 px-md-5">
+                      <form method="post" action="/loginAuth">
+                      <!-- Email input -->
+                      <div class="form-outline mb-4">
+                          <input type="text" id="userID" class="form-control" name="userID"/>
+                          <label class="form-label" for="userID" >User ID</label>
+                      </div>
+      
+                      <!-- Password input -->
+                      <div class="form-outline mb-4">
+                          <input type="password" id="password" class="form-control" name="password"/>
+                          <label class="form-label" for="password">Password</label>
+                      </div>
+          
+                      <!-- Submit button -->
+                      <button type="submit" class="btn btn-primary btn-block mb-4">
+                          login
+                      </button>
+  
+                      </form>
+                  </div>
+                  </div>
+              </div>
+    
+            </div>
+        </div>
+        </div>
+        <!-- Jumbotron -->
+
+    </section>
+    <!-- Section: Design Block -->
+
+    <section>
+      <div class="bg-image">
+        <!-- <img src="../static/images/homeBackground.jpg" alt=""> -->
+      </div>
+
+      <div class="bg-text">
+        <h3 class="text-center"><b>HOW IT WORKS</b></h3>
+        <div class="row justify-content-md-center no-gutter indexCards">
+          <div class="col col-lg-3">
+            <div class="card mx-auto" style="width: 75%; float: right; height: 28rem;">
+              <img class="card-img-top" src="../static/images/tugoCard1.jpg" alt="Card image" width="100" height="300">
+              <div class="card-body">
+                <p class="card-text">Purchase a pass online, with PBSC app or at one of out kiosks. Locate a bitke at one of our 41 stations across the 
+                  city to unlock and get ride
+                </p>
+              </div>
+            </div>
+          </div>
+  
+          <div class="col col-lg-3">
+            <div class="card mx-auto" style="width: 75%; height: 28rem;">
+              <img class="card-img-top" src="../static/images/bike.jpg" alt="Card image" width="100" height="300">
+              <div class="card-body">
+                <p class="card-text">Ride for as long as you like with the Pay-As-You-Go Pass - $1 to unlock + 50.25 per minute of ride time. 
+                  For Monthly, Annual and Tugo-For-All Pass holders, after 30 minutes, overage fees apply</p>
+              </div>
+            </div>
+          </div>
+  
+          <div class="col col-lg-3">
+            <div class="card mx-auto" style="width: 75%; float: left; height: 28rem;">
+              <img class="card-img-top" src="../static/images/tugoCard3.jpg" alt="Card image" width="100" height="300">
+              <div class="card-body">
+                <p class="card-text">Return the bike to any station citywide. Slide the bike firmly into an empty dock, wait for the green light to confirm the bike is docked and the trip will close.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+      </div>
+      
+    </section>
+
+  
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="../static/js/script.js"></script>
+</body>
+</html>

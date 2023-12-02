@@ -1,0 +1,304 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="../static/images/favicon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="../static/css/style.css">
+    <title>BikeShare</title>
+</head>
+
+<body>
+
+    {% if alert %}
+    <script>
+        alert('{{ alert }}');
+    </script>
+    {% endif %}
+    <nav class="navbar navbar-dark bg-dark justify-content-between">
+        <a class="navbar-brand" href="#">
+            <img src="../static/images/tugoNavLogo.png" alt="..." height="36">
+            Tugo BikeShare
+        </a>
+
+        <div class="navbar-expand-lg ml-auto" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item ">
+                    <a class="nav-link" href="/loggedIn">Home</a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/customers">Customers</a>
+                </li>
+
+                <li class="nav-item ">
+                    <a class="nav-link" href="/employees">Employees</a>
+                </li>
+
+                <li class="nav-item ">
+                    <a class="nav-link" href="/stations">Stations</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/vendors">Vendors</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/bikeModels">Bike Models</a>
+                </li>
+
+                <li class="nav-item ">
+                    <a class="nav-link" href="/scenarios">Scenarios</a>
+                </li>
+
+                <li class="nav-item ">
+                    <a class="nav-link" href="/help">Help</a>
+                </li>
+
+                <li class="nav-item ">
+                    <a class="nav-link" href="/signout">LogOut</a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+
+
+    <div class="row" style="margin-top: 3rem;">
+        <h3 class="text-center">Stations Data</h3>
+        {% if stationDetails %}
+        <table class="table table-bordered mx-auto w-auto table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Station ID</th>
+                    <th>Station Name</th>
+                    <th>City</th>
+                    <th>Bike Capacity</th>
+                    <th>Availale Bikes</th>
+                    <th>Maintenance Bikes</th>
+                    <th>Free Spaces</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for station in stationDetails %}
+                <tr>
+                    <td>{{ station[0] }}</td>
+                    <td>{{ station[1] }}</td>
+                    <td>{{ station[2] }}</td>
+                    <td>{{ station[3] }}</td>
+                    <td>{{ station[4] }}</td>
+                    <td>{{ station[5] }}</td>
+                    <td>{{ station[6] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+        {% endif %}
+    </div>
+
+    <div class="container justify-content-between">
+        <div class="singleRow">
+            <div class="col1">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Insert Record
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Insert Form</h5>
+                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" action="/insertStations" style="margin: 15px;">
+                                    <!-- Email input -->
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="sName">Station Name</label>
+                                        <input type="text" id="sName" class="form-control" name="sName" required />
+                                    </div>
+
+                                    <!-- Password input -->
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="city">City</label>
+                                        <input type="text" id="city" class="form-control" name="city" required />
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="bikeCapacity">Bike Capacity</label>
+                                        <input type="number" id="bikeCapacity" class="form-control" name="bikeCapacity"
+                                            required />
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="AvailBikes">Available Bikes</label>
+                                        <input type="number" id="AvailBikes" class="form-control" name="AvailBikes"
+                                            required />
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="mBikes">Maintenance Bikes</label>
+                                        <input type="number" id="mBikes" class="form-control" name="mBikes" required />
+                                    </div>
+
+                                    <!-- Submit button -->
+                                    <button type="submit" class="btn btn-primary btn-block mb-4">
+                                        Insert
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col2">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateModal">
+                    Update Record
+                </button>
+                <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Update Form</h5>
+                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" action="/updateStations" style="margin: 15px;">
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="sID">Station ID</label>
+                                        <input type="text" id="sID" class="form-control" name="sID" required />
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="sName">Station Name</label>
+                                        <input type="text" id="sName" class="form-control" name="sName" />
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="city">City</label>
+                                        <input type="text" id="city" class="form-control" name="city" />
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="bikeCapacity">Bike Capacity</label>
+                                        <input type="number" id="bikeCapacity" class="form-control" name="bikeCapacity" />
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="AvailBikes">Available Bikes</label>
+                                        <input type="number" id="AvailBikes" class="form-control" name="AvailBikes" />
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="mBikes">Maintenance Bikes</label>
+                                        <input type="number" id="mBikes" class="form-control" name="mBikes" />
+                                    </div>
+
+                                    <!-- Submit button -->
+                                    <button type="submit" class="btn btn-primary btn-block mb-4">
+                                        Update
+                                    </button>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col3">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                    Delete Record
+                </button>
+
+                <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Delete Form</h5>
+                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" action="/deleteStations" style="margin: 15px;">
+                                    <!-- CustID input -->
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="sID">Station ID</label>
+                                        <input type="text" id="sID" class="form-control" name="sID" required />
+                                    </div>
+            
+                                    <!-- Submit button -->
+                                    <button type="submit" class="btn btn-primary btn-block mb-4">
+                                        Delete
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col4">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#filterModal">
+                    Filter By City
+                </button>
+
+                <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Insert Form</h5>
+                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" action="/stationDetails">
+                                    <!-- Email input -->
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="city">City Name</label>
+                                        <input type="text" id="city" class="form-control" name="city" />
+                                    </div>
+    
+                                    <!-- Submit button -->
+                                    <button type="submit" class="btn btn-primary btn-block mb-4">
+                                        Check
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="../static/js/script.js"></script>
+</body>
+
+</html>

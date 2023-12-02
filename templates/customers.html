@@ -1,0 +1,274 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="../static/images/favicon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="../static/css/style.css">
+    <title>BikeShare</title>
+</head>
+
+<body>
+
+    {% if alert %}
+    <script>
+        alert('{{ alert }}');
+    </script>
+    {% endif %}
+    <nav class="navbar navbar-dark bg-dark justify-content-between">
+        <a class="navbar-brand" href="#">
+            <img src="../static/images/tugoNavLogo.png" alt="..." height="36">
+            Tugo BikeShare
+        </a>
+
+        <div class="navbar-expand-lg ml-auto" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item ">
+                    <a class="nav-link" href="/loggedIn">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/customers">Customers</a>
+                </li>
+
+                <li class="nav-item ">
+                    <a class="nav-link" href="/employees">Employees</a>
+                </li>
+
+                <li class="nav-item ">
+                    <a class="nav-link" href="/stations">Stations</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/vendors">Vendors</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/bikeModels">Bike Models</a>
+                </li>
+
+                <li class="nav-item ">
+                    <a class="nav-link" href="/scenarios">Scenarios</a>
+                </li>
+
+                <li class="nav-item ">
+                    <a class="nav-link" href="/signout">LogOut</a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+
+    <div class="row" style="margin-top: 3rem;">
+        <h3 class="text-center">Customers Data</h3>
+        {% if customers %}
+        <table class="table table-bordered mx-auto w-auto table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>CustID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Age</th>
+                    <th>City</th>
+                    <th>State</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for customer in customers %}
+                <tr>
+                    <td>{{ customer[0] }}</td>
+                    <td>{{ customer[1] }}</td>
+                    <td>{{ customer[2] }}</td>
+                    <td>{{ customer[10] }}</td>
+                    <td>{{ customer[3] }}</td>
+                    <td>{{ customer[7] }}</td>
+                    <td>{{ customer[8] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+        {% endif %}
+    </div>
+
+    <div class="container justify-content-between">
+        <div class="singleRow" >
+            <div class="col1">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Insert Record
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Insert Form</h5>
+                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" action="/insertCustomers" style="margin: 15px;">
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="firstName">First Name</label>
+                                        <input type="text" id="firstName" class="form-control" name="firstName"
+                                            required />
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="lastName">Last Name</label>
+                                        <input type="text" id="lastName" class="form-control" name="lastName"
+                                            required />
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="email">Email</label>
+                                        <input type="text" id="email" class="form-control" name="email" required />
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="age">Age</label>
+                                        <input type="number" id="age" class="form-control" name="age" required />
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="city">City</label>
+                                        <input type="text" id="city" class="form-control" name="city" required />
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="state">State</label>
+                                        <input type="text" id="state" class="form-control" name="state" required />
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary btn-block mb-4">
+                                        Insert
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col2">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateModal">
+                    Update Record
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Update Form</h5>
+                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" action="/updateCustomers" style="margin: 15px;">
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="custID">Customer ID</label>
+                                        <input type="text" id="custID" class="form-control" name="custID" required />
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="firstName">First Name</label>
+                                        <input type="text" id="firstName" class="form-control" name="firstName" />
+                                    </div>
+
+                                    <!-- Password input -->
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="lastName">Last Name</label>
+                                        <input type="text" id="lastName" class="form-control" name="lastName" />
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="email">Email</label>
+                                        <input type="text" id="email" class="form-control" name="email" />
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="age">Age</label>
+                                        <input type="number" id="age" class="form-control" name="age" />
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="city">City</label>
+                                        <input type="text" id="city" class="form-control" name="city" />
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="state">State</label>
+                                        <input type="text" id="state" class="form-control" name="state" />
+                                    </div>
+
+                                    <!-- Submit button -->
+                                    <button type="submit" class="btn btn-primary btn-block mb-4">
+                                        Update
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col3">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                    Delete Record
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Delete Form</h5>
+                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" action="/deleteCustomers" style="margin: 15px;">
+                                    <!-- CustID input -->
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="custID">CustID</label>
+                                        <input type="text" id="custID" class="form-control" name="custID" required />
+                                    </div>
+
+                                    <!-- Submit button -->
+                                    <button type="submit" class="btn btn-primary btn-block mb-4">
+                                        Delete
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="../static/js/script.js"></script>
+</body>
+
+</html>
